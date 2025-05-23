@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECHO - Elevate Your Everyday Style</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#000000',secondary:'#333333'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+.hero-section {
+background-image: url('https://readdy.ai/api/search-image?query=high-end%20fashion%20photography%20of%20elegant%20clothing%20items%20on%20hangers%20and%20stands%2C%20clean%20white%20background%20on%20left%20side%20transitioning%20to%20neatly%20arranged%20premium%20garments%20on%20right%20side%2C%20no%20models%2C%20minimalist%20aesthetic%2C%20monochromatic%20color%20scheme%2C%20professional%20product%20photography%2C%20high%20contrast%20lighting%2C%20perfect%20for%20fashion%20website%20hero%20section&width=1200&height=600&seq=12345&orientation=landscape');
+background-size: cover;
+background-position: center;
+}
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease;
+}
+.accordion-content.active {
+max-height: 200px;
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header Navigation -->
+<header class="w-full bg-white border-b border-gray-100 relative z-50">
+<div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center">
+<h1 class="text-2xl font-['Pacifico'] text-primary transition-all duration-300 hover:opacity-80">ECHO</h1>
+</div>
+<nav class="hidden md:flex space-x-6">
+<a href="#" class="text-sm font-medium relative cursor-pointer group">
+<span class="relative z-10 transition-colors duration-300 group-hover:text-primary">Home</span>
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a>
+<a href="#" class="text-sm font-medium relative cursor-pointer group">
+<span class="relative z-10 transition-colors duration-300 group-hover:text-primary">Wardrobe</span>
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a>
+<a href="#" class="text-sm font-medium relative cursor-pointer group">
+<span class="relative z-10 transition-colors duration-300 group-hover:text-primary">Store</span>
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a>
+<a href="#" class="text-sm font-medium relative cursor-pointer group">
+<span class="relative z-10 transition-colors duration-300 group-hover:text-primary">Story</span>
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a>
+<a href="#" class="text-sm font-medium relative cursor-pointer group">
+<span class="relative z-10 transition-colors duration-300 group-hover:text-primary">Connect</span>
+<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a>
+</nav>
+<div class="flex items-center space-x-4">
+<div class="w-6 h-6 flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110 hover:text-primary">
+<i class="ri-search-line"></i>
+</div>
+<div class="w-6 h-6 flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110 hover:text-primary">
+<i class="ri-user-line"></i>
+</div>
+<div id="cartIcon" class="w-6 h-6 flex items-center justify-center cursor-pointer relative transition-transform duration-300 hover:scale-110 hover:text-primary">
+<i class="ri-shopping-bag-line"></i>
+<span id="cartCount" class="absolute -top-1 -right-1 bg-primary text-white text-xs w-4 h-4 flex items-center justify-center rounded-full hidden">0</span>
+<div id="cartDropdown" class="absolute top-full right-0 mt-2 w-[380px] bg-white rounded shadow-lg border border-gray-100 hidden z-[999]">
+<div id="cartEmpty" class="p-6 text-center">
+<div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full bg-gray-50">
+<i class="ri-shopping-bag-line text-2xl text-gray-400"></i>
+</div>
+<p class="text-gray-600 mb-4">Your shopping bag is empty</p>
+<button class="bg-primary text-white px-6 py-2 text-sm font-medium !rounded-button whitespace-nowrap cursor-pointer">Continue Shopping</button>
+</div>
+<div id="cartContent" class="hidden">
+<div class="p-4 border-b border-gray-100">
+<h3 class="font-medium">Shopping Bag</h3>
+</div>
+<div id="cartItems" class="max-h-[320px] overflow-y-auto"></div>
+<div class="p-4 border-t border-gray-100">
+<div class="flex justify-between items-center mb-4">
+<span class="font-medium">Total</span>
+<span id="cartTotal" class="font-medium">$0.00</span>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-white border border-primary text-primary px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg !rounded-button whitespace-nowrap cursor-pointer">View Bag</button>
+<button class="bg-primary text-white px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg !rounded-button whitespace-nowrap cursor-pointer">Checkout</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero-section w-full h-[500px] relative z-0">
+<div class="container mx-auto px-4 h-full flex items-center">
+<div class="w-full md:w-1/2 z-10">
+<h1 class="text-4xl md:text-5xl font-bold text-primary mb-4">STYLE WITH PURPOSE — <br>CLOTHING THAT DEFINES YOU.</h1>
+<p class="text-gray-700 mb-6">Explore our curated selection of enduring designs crafted for today's discerning individual.</p>
+<button class="bg-primary text-white px-6 py-3 font-medium !rounded-button whitespace-nowrap cursor-pointer transition-all duration-300 hover:bg-opacity-90 hover:shadow-xl hover:scale-[1.02] hover:-translate-y-[1px]">Explore Now</button>
+</div>
+</div>
+</section>
+<!-- Banner -->
+<div class="w-full bg-primary text-white py-2">
+<div class="container mx-auto overflow-hidden">
+<div class="flex animate-marquee whitespace-nowrap">
+<span class="mx-4 text-sm font-medium">COMPLIMENTARY DELIVERY ON PURCHASES OVER $150</span>
+<span class="mx-4 text-sm font-medium">AUTUMN COLLECTION NOW AVAILABLE</span>
+<span class="mx-4 text-sm font-medium">REGISTER FOR 15% OFF YOUR INITIAL PURCHASE</span>
+<span class="mx-4 text-sm font-medium">ETHICAL FASHION FOR A CONSCIOUS LIFESTYLE</span>
+<span class="mx-4 text-sm font-medium">EXCLUSIVE PIECES JUST ARRIVED</span>
+<span class="mx-4 text-sm font-medium">EXPLORE OUR SIGNATURE COLLECTION</span>
+<span class="mx-4 text-sm font-medium">BECOME A MEMBER OF OUR LOYALTY PROGRAM</span>
+<span class="mx-4 text-sm font-medium">FLEXIBLE PAYMENT OPTIONS WITH AFTERPAY</span>
+<span class="mx-4 text-sm font-medium">HASSLE-FREE RETURNS WITHIN 45 DAYS</span>
+<span class="mx-4 text-sm font-medium">MEMBERS-ONLY PERKS AND PREVIEWS</span>
+</div>
+</div>
+<style>
+.animate-marquee {
+animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+0% { transform: translateX(0); }
+100% { transform: translateX(-50%); }
+}
+</style>
+</div>
+<!-- Shop By Category -->
+<section class="py-12 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-4xl font-bold text-primary">Browse By Collection</h2>
+<button class="bg-primary text-white px-4 py-2 text-sm font-medium !rounded-button whitespace-nowrap cursor-pointer transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-[1px]">See All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20stylish%20Black%20model%20wearing%20a%20premium%20beige%20cashmere%20sweater%2C%20full%20body%20shot%20against%20clean%20minimalist%20background%2C%20natural%20pose%20highlighting%20the%20fit%20and%20drape%20of%20the%20sweater%2C%20soft%20studio%20lighting%2C%20high-end%20fashion%20editorial%20style%2C%20elegant%20pose%20showing%20the%20quality%20and%20craftsmanship&width=400&height=600&seq=1001&orientation=portrait" alt="Knitwear" class="w-full h-full object-cover">
+</div>
+<div class="p-4 text-center">
+<h3 class="font-medium text-lg mb-2">Luxe Knits</h3>
+<button class="bg-white border border-primary text-primary px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg !rounded-button whitespace-nowrap cursor-pointer">Explore Now</button>
+</div>
+</div>
+<div class="bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20model%20wearing%20tailored%20black%20wool%20trousers%2C%20full%20body%20shot%20showing%20perfect%20fit%20and%20drape%2C%20clean%20minimalist%20background%2C%20elegant%20pose%20emphasizing%20the%20cut%20and%20style%2C%20high-end%20fashion%20editorial%20lighting&width=400&height=600&seq=1002&orientation=portrait" alt="Trousers" class="w-full h-full object-cover">
+</div>
+<div class="p-4 text-center">
+<h3 class="font-medium text-lg mb-2">Tailored Bottoms</h3>
+<button class="bg-white border border-primary text-primary px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg !rounded-button whitespace-nowrap cursor-pointer">Explore Now</button>
+</div>
+</div>
+<div class="bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20model%20wearing%20a%20smart%20casual%20outfit%20featuring%20a%20light%20gray%20merino%20wool%20cardigan%20over%20a%20white%20t-shirt%2C%20relaxed%20yet%20polished%20look%2C%20full%20body%20shot%20against%20clean%20minimalist%20background%2C%20natural%20pose%20highlighting%20the%20comfortable%20yet%20professional%20style%2C%20soft%20studio%20lighting%20showing%20texture%20and%20quality%20of%20the%20fabric&width=400&height=600&seq=1004&orientation=portrait" alt="Smart Casual" class="w-full h-full object-cover">
+</div>
+<div class="p-4 text-center">
+<h3 class="font-medium text-lg mb-2">Modern Outerwear</h3>
+<button class="bg-white border border-primary text-primary px-4 py-2 text-sm font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-lg !rounded-button whitespace-nowrap cursor-pointer">Explore Now</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Style Revolution -->
+<section class="py-12">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-primary mb-8">Embrace Your Personal Style Journey</h2>
+<div class="bg-[#f5f5f5] rounded p-6 flex flex-col md:flex-row items-center">
+<div class="md:w-1/3 mb-6 md:mb-0">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20luxurious%20sage%20gray-green%20crewneck%20sweatshirt%2C%20minimalist%20design%20with%20clean%20lines%2C%20premium%20cotton%20blend%20material%20showing%20rich%20texture%2C%20elegant%20draping%20on%20a%20clean%20white%20background%2C%20soft%20studio%20lighting%20highlighting%20the%20subtle%20details%20and%20high-end%20finish%2C%20focus%20on%20the%20sophisticated%20neckline%20and%20chest%20area%2C%20modern%20fashion%20editorial%20style&width=400&height=400&seq=1005&orientation=squarish" alt="Crafted Essentials" class="w-full rounded">
+</div>
+<div class="md:w-2/3 md:pl-10">
+<div class="mb-4">
+<h3 class="uppercase font-bold text-3xl mb-2">ECHO.</h3>
+<p class="text-gray-700 text-lg mb-4">Discover refined, comfortable garments that transform your wardrobe. Our essentials feature superior materials and thoughtful craftsmanship for daily sophistication.</p>
+<button class="bg-primary text-white px-6 py-3 font-medium !rounded-button whitespace-nowrap cursor-pointer transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg">Explore Collection</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Classic Staples -->
+<section class="py-12 bg-white">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+<h2 class="text-4xl font-bold text-primary">Curated Wardrobe Essentials</h2>
+</div>
+<div class="relative">
+<div class="overflow-x-auto pb-6 hide-scrollbar" id="scrollContainer">
+<div class="flex gap-6 min-w-max">
+<div class="w-[400px] bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20basic%20white%20t-shirt%20on%20a%20young%20male%20model%2C%20minimalist%20clean%20studio%20background%2C%20natural%20lighting%20highlighting%20the%20premium%20cotton%20fabric%20quality%20and%20perfect%20fit%2C%20fashion%20editorial%20style&width=400&height=500&seq=1011&orientation=portrait" alt="Basic White T-Shirt" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6 flex flex-col h-[240px]">
+<h3 class="font-medium text-xl mb-2">Essential White Tee</h3>
+<p class="text-gray-600 mb-6 min-h-[50px]">A Wardrobe Foundation Crafted From Organic Cotton For Exceptional Softness And Everyday Versatility</p>
+<div class="mt-auto mb-4">
+<span class="text-xl font-medium block mb-3">$24.95</span>
+<button class="bg-primary text-white px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg !rounded-button whitespace-nowrap w-fit cursor-pointer">Add To Bag</button>
+</div>
+</div>
+</div>
+<div class="w-[400px] bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20white%20long%20sleeve%20t-shirt%20on%20a%20female%20model%2C%20minimalist%20clean%20studio%20background%2C%20natural%20lighting%20highlighting%20the%20premium%20fabric%20quality%20and%20elegant%20drape%2C%20fashion%20editorial%20style&width=400&height=500&seq=1012&orientation=portrait" alt="Long Sleeve T-Shirt" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6 flex flex-col h-[240px]">
+<h3 class="font-medium text-xl mb-2">Signature Long Sleeve</h3>
+<p class="text-gray-600 mb-6 min-h-[50px]">This Women's Essential Features Our Signature Silhouette With Refined Details For Elevated Comfort</p>
+<div class="mt-auto mb-4">
+<span class="text-xl font-medium block mb-3">$32.95</span>
+<button class="bg-primary text-white px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg !rounded-button whitespace-nowrap w-fit cursor-pointer">Add To Bag</button>
+</div>
+</div>
+</div>
+<div class="w-[400px] bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20classic%20white%20hoodie%20on%20a%20female%20model%2C%20minimalist%20clean%20studio%20background%2C%20natural%20lighting%20highlighting%20the%20premium%20cotton%20blend%20fabric%20and%20comfortable%20fit%2C%20fashion%20editorial%20style&width=400&height=500&seq=1013&orientation=portrait" alt="Classic White Hoodie" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6 flex flex-col h-[240px]">
+<h3 class="font-medium text-xl mb-2">Minimalist Hoodie</h3>
+<p class="text-gray-600 mb-6 min-h-[50px]">An Enduring Essential That Integrates Seamlessly With Any Look. Crafted From Sustainable Cotton Blend</p>
+<div class="mt-auto mb-4">
+<span class="text-xl font-medium block mb-3">$58.00</span>
+<button class="bg-primary text-white px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg !rounded-button whitespace-nowrap w-fit cursor-pointer">Add To Bag</button>
+</div>
+</div>
+</div>
+<div class="w-[400px] bg-white rounded shadow overflow-hidden">
+<div class="h-[450px] overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=professional%20fashion%20photography%20of%20a%20black%20crewneck%20sweatshirt%20on%20a%20male%20model%2C%20minimalist%20clean%20studio%20background%2C%20natural%20lighting%20highlighting%20the%20premium%20cotton%20blend%20fabric%20and%20modern%20fit%2C%20fashion%20editorial%20style&width=400&height=500&seq=1014&orientation=portrait" alt="Classic Crewneck" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6 flex flex-col h-[240px]">
+<h3 class="font-medium text-xl mb-2">Modern Crewneck</h3>
+<p class="text-gray-600 mb-6 min-h-[50px]">The Ideal Layer For Every Season. Created With Our Proprietary Fabric Blend For Unmatched Comfort</p>
+<div class="mt-auto mb-4">
+<span class="text-xl font-medium block mb-3">$49.95</span>
+<button class="bg-primary text-white px-6 py-2 text-sm font-medium transition-all duration-300 hover:bg-opacity-80 hover:shadow-lg !rounded-button whitespace-nowrap w-fit cursor-pointer">Add To Bag</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="relative h-1 bg-gray-200 rounded mt-4">
+<div class="absolute h-full bg-primary rounded transition-all duration-300" id="scrollIndicator" style="width: 25%; left: 0%"></div>
+</div>
+</div>
+</div>
+</section>
+<style>
+.hide-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.hide-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+.line-clamp-2 {
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const scrollContainer = document.getElementById('scrollContainer');
+const scrollIndicator = document.getElementById('scrollIndicator');
+function updateScrollIndicator() {
+const totalScrollWidth = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+const scrollPercentage = (scrollContainer.scrollLeft / totalScrollWidth) * 100;
+const maxScroll = 100 - ((scrollContainer.clientWidth / scrollContainer.scrollWidth) * 100);
+const indicatorWidth = (scrollContainer.clientWidth / scrollContainer.scrollWidth) * 100;
+scrollIndicator.style.width = `${indicatorWidth}%`;
+scrollIndicator.style.left = `${Math.min(scrollPercentage, maxScroll)}%`;
+}
+scrollContainer.addEventListener('scroll', updateScrollIndicator);
+updateScrollIndicator();
+});
+</script>
+<!-- Join Community -->
+<section class="py-10">
+<div class="container mx-auto px-4">
+<div class="bg-primary text-white p-8 rounded flex flex-col md:flex-row items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold mb-2">BE PART OF OUR COMMUNITY AND STAY AHEAD OF TRENDS</h2>
+<p class="text-gray-200">Join our newsletter for member-only offers and curated style insights</p>
+</div>
+<div class="mt-4 md:mt-0">
+<form class="flex flex-col sm:flex-row">
+<div class="relative">
+<div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+<i class="ri-mail-line text-gray-400"></i>
+</div>
+<input type="email" placeholder="Your email" class="pl-11 pr-4 py-3 rounded-l-xl rounded-r-none w-full sm:w-[240px] border-2 border-r-0 border-white/20 bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:border-white/40">
+</div>
+<button type="submit" class="bg-white text-primary px-6 py-3 rounded-r-xl rounded-l-none font-medium transition-all duration-300 hover:bg-opacity-90 hover:shadow-lg flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer">
+Join Now
+<i class="ri-arrow-right-line"></i>
+</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-12 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-primary mb-8">What Our Community Says</h2>
+<div class="flex justify-end mb-2">
+<div class="flex items-center">
+<div class="flex">
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-half-fill text-yellow-400"></i>
+</div>
+<span class="ml-2 text-sm text-gray-600">4.9/5</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-gray-50 p-6 rounded shadow transition-all duration-300 hover:shadow-md hover:bg-white hover:-translate-y-[2px]">
+<div class="mb-4">
+<i class="ri-double-quotes-l text-4xl text-[#222222]"></i>
+<p class="text-gray-700 mb-4">The craftsmanship is simply outstanding. I've been collecting their essentials for several seasons and they maintain their shape and color beautifully. Absolutely worth the investment!</p>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center mr-3">
+<i class="ri-user-fill text-gray-500"></i>
+</div>
+<div>
+<p class="font-medium">Waka</p>
+<p class="text-sm text-gray-600">Verified Member</p>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 p-6 rounded shadow transition-all duration-300 hover:shadow-md hover:bg-white hover:-translate-y-[2px]">
+<div class="mb-4">
+<i class="ri-double-quotes-l text-4xl text-[#222222]"></i>
+<p class="text-gray-700 mb-4">I appreciate the versatility of these garments. They transition perfectly from casual to formal settings. The fabrics feel luxurious and the fit is impeccable. Highly recommended!</p>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center mr-3">
+<i class="ri-user-fill text-gray-500"></i>
+</div>
+<div>
+<p class="font-medium">Ghetto Yut</p>
+<p class="text-sm text-gray-600">Verified Member</p>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 p-6 rounded shadow transition-all duration-300 hover:shadow-md hover:bg-white hover:-translate-y-[2px]">
+<div class="mb-4">
+<i class="ri-double-quotes-l text-4xl text-[#222222]"></i>
+<p class="text-gray-700 mb-4">The attention to detail is what distinguishes ECHO from others. From the precision stitching to the sustainable packaging, everything exudes quality. Their customer care is exceptional!</p>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center mr-3">
+<i class="ri-user-fill text-gray-500"></i>
+</div>
+<div>
+<p class="font-medium">Maggiso</p>
+<p class="text-sm text-gray-600">Verified Member</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-12 bg-gray-50">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-primary mb-8">Common Questions</h2>
+<div class="max-w-3xl mx-auto">
+<div class="mb-4">
+<div class="accordion-header flex justify-between items-center bg-white p-4 rounded cursor-pointer">
+<h3 class="font-medium">How can I determine my ideal size?</h3>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-down-s-line accordion-icon"></i>
+</div>
+</div>
+<div class="accordion-content bg-white px-4 rounded-b">
+<p class="pb-4 text-gray-600">Each product page includes comprehensive sizing information. Take your measurements and reference our size charts. If you're between sizes, we generally recommend selecting the larger size for optimal comfort.</p>
+</div>
+</div>
+<div class="mb-4">
+<div class="accordion-header flex justify-between items-center bg-white p-4 rounded cursor-pointer">
+<h3 class="font-medium">Are your garments sustainably produced?</h3>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-down-s-line accordion-icon"></i>
+</div>
+</div>
+<div class="accordion-content bg-white px-4 rounded-b">
+<p class="pb-4 text-gray-600">Absolutely. All our products are ethically crafted in certified facilities. We ensure equitable compensation and safe working environments throughout our entire supply chain.</p>
+</div>
+</div>
+<div class="mb-4">
+<div class="accordion-header flex justify-between items-center bg-white p-4 rounded cursor-pointer">
+<h3 class="font-medium">What is your return and exchange policy?</h3>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-down-s-line accordion-icon"></i>
+</div>
+</div>
+<div class="accordion-content bg-white px-4 rounded-b">
+<p class="pb-4 text-gray-600">We provide a 45-day return window for unworn items in their original condition and packaging. Exchanges are also available. Please visit our Returns page for detailed information on the process.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary text-white pt-12 pb-6">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<div>
+<h3 class="text-2xl font-['Pacifico'] mb-4">ECHO</h3>
+<p class="text-gray-300 mb-4">Meticulously Crafted Garments That Express Your Identity.</p>
+</div>
+<div>
+<h4 class="font-bold mb-4">Latest Arrivals</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Autumn Collection</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Core Essentials</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Signature Series</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Support</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Common Questions</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Delivery</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Returns</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Sizing Guide</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Our Journey</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Our Heritage</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Sustainability</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Join Our Team</a></li>
+<li><a href="#" class="text-gray-300 hover:text-white cursor-pointer">Get In Touch</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+<p class="text-sm text-gray-400">© Copyright 2025 ECHO. All rights reserved.</p>
+<div class="flex space-x-4 mt-4 md:mt-0">
+<a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-instagram-line"></i>
+</div>
+</a>
+<a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-facebook-line"></i>
+</div>
+</a>
+<a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-twitter-x-line"></i>
+</div>
+</a>
+<a href="#" class="text-gray-400 hover:text-white cursor-pointer">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-pinterest-line"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<style>
+.toast-notification {
+position: fixed;
+top: 20px;
+right: 20px;
+background-color: #000000;
+color: white;
+padding: 16px 24px;
+border-radius: 8px;
+z-index: 9999;
+opacity: 0;
+transform: translateY(-20px);
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.toast-notification.show {
+opacity: 1;
+transform: translateY(0);
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const accordionHeaders = document.querySelectorAll('.accordion-header');
+const cartIcon = document.getElementById('cartIcon');
+const cartDropdown = document.getElementById('cartDropdown');
+const cartEmpty = document.getElementById('cartEmpty');
+const cartContent = document.getElementById('cartContent');
+const cartItems = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+const cartCount = document.getElementById('cartCount');
+let isCartOpen = false;
+let cart = [];
+function showToast(message) {
+const existingToast = document.querySelector('.toast-notification');
+if (existingToast) {
+existingToast.remove();
+}
+const toast = document.createElement('div');
+toast.className = 'toast-notification';
+toast.innerHTML = `
+<i class="ri-checkbox-circle-line"></i>
+<span>${message}</span>
+`;
+document.body.appendChild(toast);
+setTimeout(() => {
+toast.classList.add('show');
+}, 100);
+setTimeout(() => {
+toast.classList.remove('show');
+setTimeout(() => {
+toast.remove();
+}, 300);
+}, 3000);
+}
+function addToCart(button) {
+const productCard = button.closest('.bg-white');
+const productName = productCard.querySelector('h3').textContent;
+const productPrice = parseFloat(productCard.querySelector('.text-xl').textContent.replace('$', ''));
+const productImage = productCard.querySelector('img').src;
+const existingItem = cart.find(item => item.name === productName);
+if (existingItem) {
+existingItem.quantity += 1;
+} else {
+cart.push({
+id: Date.now(),
+name: productName,
+price: productPrice,
+image: productImage,
+quantity: 1
+});
+}
+updateCart();
+showToast('Item added to your bag');
+}
+document.querySelectorAll('[class*="Add To Bag"]').forEach(button => {
+button.addEventListener('click', function() {
+addToCart(this);
+});
+});
+function updateCart() {
+const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+if (cart.length === 0) {
+cartEmpty.classList.remove('hidden');
+cartContent.classList.add('hidden');
+cartCount.classList.add('hidden');
+} else {
+cartEmpty.classList.add('hidden');
+cartContent.classList.remove('hidden');
+cartCount.classList.remove('hidden');
+cartCount.textContent = totalQuantity;
+cartItems.innerHTML = cart.map(item => `
+<div class="p-4 border-b border-gray-100 flex gap-4">
+<img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover rounded">
+<div class="flex-1">
+<h4 class="font-medium text-sm mb-1">${item.name}</h4>
+<p class="text-gray-600 text-sm mb-2">$${item.price.toFixed(2)}</p>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 flex items-center justify-center border border-gray-200 rounded" onclick="updateQuantity(${item.id}, -1)">-</button>
+<span class="text-sm">${item.quantity}</span>
+<button class="w-6 h-6 flex items-center justify-center border border-gray-200 rounded" onclick="updateQuantity(${item.id}, 1)">+</button>
+</div>
+</div>
+<button class="text-gray-400 hover:text-gray-600" onclick="removeItem(${item.id})">
+<i class="ri-close-line"></i>
+</button>
+</div>
+`).join('');
+const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+cartTotal.textContent = `$${total.toFixed(2)}`;
+}
+}
+cartIcon.addEventListener('click', (e) => {
+e.stopPropagation();
+isCartOpen = !isCartOpen;
+if (isCartOpen) {
+cartDropdown.classList.remove('hidden');
+} else {
+cartDropdown.classList.add('hidden');
+}
+});
+document.addEventListener('click', (e) => {
+if (!cartIcon.contains(e.target) && isCartOpen) {
+cartDropdown.classList.add('hidden');
+isCartOpen = false;
+}
+});
+window.updateQuantity = (id, change) => {
+const item = cart.find(item => item.id === id);
+if (item) {
+item.quantity = Math.max(1, item.quantity + change);
+updateCart();
+}
+};
+window.removeItem = (id) => {
+cart = cart.filter(item => item.id !== id);
+updateCart();
+};
+updateCart();
+accordionHeaders.forEach(header => {
+header.addEventListener('click', function() {
+const content = this.nextElementSibling;
+const icon = this.querySelector('.accordion-icon');
+content.classList.toggle('active');
+if (content.classList.contains('active')) {
+icon.classList.remove('ri-arrow-down-s-line');
+icon.classList.add('ri-arrow-up-s-line');
+} else {
+icon.classList.remove('ri-arrow-up-s-line');
+icon.classList.add('ri-arrow-down-s-line');
+}
+});
+});
+});
+</script>
+</body>
+</html>
